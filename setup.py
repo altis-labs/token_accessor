@@ -1,8 +1,8 @@
 from setuptools import find_packages, setup
 
 setup(
-    name="common",  # Required
-    version="0.0.0",  # Required
+    name="token_accessor",  # Required
+    version="0.0.1",  # Required
     author="Altis Labs, Inc.",  # Optional
     packages=find_packages(exclude=["contrib", "docs", "tests"]),  # Required
     python_requires=">=3.11.6",
