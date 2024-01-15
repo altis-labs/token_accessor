@@ -21,6 +21,7 @@ httpx = "~=0.23.3"
 pipenv-setup = "~=3.2.0"
 vistir = "==0.6.1"
 black = "*"
+setuptools = "*"
 
 [scripts]
 update-setup = "pipenv-setup sync"
