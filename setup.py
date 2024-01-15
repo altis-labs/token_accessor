@@ -4,7 +4,8 @@ setup(
     name="token_accessor",  # Required
     version="0.0.1",  # Required
     author="Altis Labs, Inc.",  # Optional
-    packages=find_packages(exclude=["contrib", "docs", "tests"]),  # Required
+    package_dir={"": "token_accessor"},
+    packages=find_packages(where="token_accessor"),  # Required
     python_requires=">=3.11.6",
     install_requires=[
         "aws-requests-auth==0.4.3",
