@@ -18,13 +18,9 @@ freezegun = "~=1.2.2"
 httmock = "~=1.4.0"
 moto = { extras = ["s3"], version = "*" }
 httpx = "~=0.23.3"
-pipenv-setup = "~=3.2.0"
 vistir = "==0.6.1"
 black = "*"
 build = "~=1.0.3"
-
-[scripts]
-update-setup = "pipenv-setup sync"
 
 [requires]
 python_version = "3.11"
