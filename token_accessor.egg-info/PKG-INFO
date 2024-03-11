@@ -43,6 +43,15 @@ This package provides a token accessor that can be used to fetch and cache a tok
 - this is not a public package, so it is not supported for general usage
 
 
+## Build
+This repo contains all of the build artifacts. This is not ideal, but it is the current state of the repo. The build artifacts are included in the repo to make it easier to install the package via git. To build the package, run the following command:
+
+```bash
+pipenv run build
+```
+
+Be sure to commit + push the updated artifacts to the repo after building.
+
 ## Usage
 
 ### Installing as a dependency
