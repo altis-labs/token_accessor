@@ -10,7 +10,7 @@ authors = [
 ]
 description = "A library for accessing the Token Cache API"
 readme = "README.md"
-requires-python = ">=3.11"
+requires-python = ">=3.8"
 dependencies = [
     "aws-requests-auth==0.4.3",
     "backoff==2.2.1; python_version >= '3.7' and python_version < '4.0'",

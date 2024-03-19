@@ -5,7 +5,7 @@ Summary: A library for accessing the Token Cache API
 Author-email: "Altis Labs, Inc." <info@altislabs.com>
 Project-URL: Homepage, https://github.com/altis-labs/token_accessor
 Project-URL: Issues, https://github.com/altis-labs/token_accessor/issues
-Requires-Python: >=3.11
+Requires-Python: >=3.8
 Description-Content-Type: text/markdown
 License-File: LICENSE
 Requires-Dist: aws-requests-auth==0.4.3
