@@ -24,6 +24,7 @@ token_accessor/tests/unit/get_timestamp_test.py
 token_accessor/tests/unit/gql_client_test.py
 token_accessor/tests/unit/jwt_token_test.py
 token_accessor/tests/unit/legacy_token_cache_token_accessor_test.py
+token_accessor/tests/unit/lock_test.py
 token_accessor/tests/unit/memory_token_accessor_test.py
 token_accessor/tests/unit/token_accessor_base_test.py
 token_accessor/tests/unit/try_parse_float_test.py
