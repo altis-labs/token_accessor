@@ -2,13 +2,13 @@ from unittest.mock import MagicMock, patch
 
 import pytest
 
-from token_accessor.lock import Lock
+from token_accessor.lock import ThreadLock
 from token_accessor.token_accessor_base import TokenAccessorBase
 
 
 @patch.object(TokenAccessorBase, "__abstractmethods__", set())
 def test_token_accessor_base_locks_on_get_token():
-    mock_lock = MagicMock(Lock)
+    mock_lock = MagicMock(ThreadLock)
 
     accessor = TokenAccessorBase(mock_lock)
     accessor.get_token()
@@ -22,7 +22,7 @@ def test_token_accessor_base_locks_on_get_token():
 def test_token_accessor_base_releases_when_access_token_raises(
     _mock_access_token,
 ):
-    mock_lock = MagicMock(Lock)
+    mock_lock = MagicMock(ThreadLock)
 
     accessor = TokenAccessorBase(mock_lock)
 

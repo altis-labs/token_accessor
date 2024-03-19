@@ -1,21 +1,9 @@
-from abc import ABC, abstractmethod
-
 from gevent.lock import BoundedSemaphore
 
 THREAD_LOCK_TYPE = "thread"
 
 
-class Lock(ABC):
-    @abstractmethod
-    def acquire(self) -> bool:
-        pass
-
-    @abstractmethod
-    def release(self) -> None:
-        pass
-
-
-class ThreadLock(Lock):
+class ThreadLock:
     def __init__(self):
         self.__thread_lock = BoundedSemaphore(1)
 

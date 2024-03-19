@@ -5,7 +5,7 @@ import requests
 from token_accessor.get_aws_auth import get_aws_auth
 from token_accessor.get_env_value import get_env_value
 from token_accessor.jwt_token import Token
-from token_accessor.lock import Lock, ThreadLock
+from token_accessor.lock import ThreadLock
 from token_accessor.token_accessor_base import TokenAccessorBase
 from token_accessor.token_cache_token import parse_token
 
@@ -60,7 +60,7 @@ def create_dicom_server_token_accessor(
 class TokenCacheTokenAccessor(TokenAccessorBase):
     def __init__(
         self,
-        token_lock: Lock,
+        token_lock: ThreadLock,
         token_cache_url: str,
         token_cache_region: str,
         client_scope: str,

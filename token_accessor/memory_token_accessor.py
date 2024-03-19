@@ -2,7 +2,7 @@ import logging
 from typing import Optional
 
 from token_accessor.jwt_token import Token
-from token_accessor.lock import Lock
+from token_accessor.lock import ThreadLock
 from token_accessor.token_accessor_base import TokenAccessorBase
 
 log = logging.getLogger()
@@ -11,7 +11,7 @@ log = logging.getLogger()
 class MemoryTokenAccessor(TokenAccessorBase):
     def __init__(
         self,
-        token_lock: Lock,
+        token_lock: ThreadLock,
         token_accessor: TokenAccessorBase,
         cached_token: Optional[Token] = None,
     ):

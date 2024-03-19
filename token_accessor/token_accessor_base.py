@@ -1,11 +1,11 @@
 from abc import ABC, abstractmethod
 
 from token_accessor.jwt_token import Token
-from token_accessor.lock import Lock
+from token_accessor.lock import ThreadLock
 
 
 class TokenAccessorBase(ABC):
-    def __init__(self, lock: Lock):
+    def __init__(self, lock: ThreadLock):
         self.__token_lock = lock
 
     def get_token(self) -> Token:
