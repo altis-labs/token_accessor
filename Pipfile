@@ -4,7 +4,6 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-gevent = "~=22.10.2"
 gql = {extras = ["requests"], version = "~=3.4.0" }
 requests = "==2.27.1"
 boto3 = "~=1.26.87"
@@ -17,8 +16,6 @@ pytest-cov = "~=4.0"
 freezegun = "~=1.2.2"
 httmock = "~=1.4.0"
 moto = { extras = ["s3"], version = "*" }
-httpx = "~=0.23.3"
-vistir = "==0.6.1"
 black = "*"
 build = "~=1.0.3"
 
