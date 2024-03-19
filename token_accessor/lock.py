@@ -1,7 +1,5 @@
 from gevent.lock import BoundedSemaphore
 
-THREAD_LOCK_TYPE = "thread"
-
 
 class ThreadLock:
     def __init__(self):
