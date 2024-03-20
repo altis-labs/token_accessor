@@ -4,6 +4,7 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
+gevent = "~=22.10.2"
 gql = {extras = ["requests"], version = "~=3.4.0" }
 requests = "==2.27.1"
 boto3 = "~=1.26.87"
