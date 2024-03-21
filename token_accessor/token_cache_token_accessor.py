@@ -24,6 +24,9 @@ def create_token_accessor(
     if not token_scope:
         raise ValueError("TOKEN_SCOPE is not defined")
 
+    if not token_cache_url.endswith("/"):
+        token_cache_url += "/"
+
     url = urljoin(token_cache_url, url_path)
 
     parsed_url = urlparse(url)
