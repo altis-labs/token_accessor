@@ -1,3 +1,4 @@
+from typing import Optional
 from urllib.parse import urljoin, urlparse
 
 import requests
@@ -11,7 +12,7 @@ from token_accessor.token_cache_token import parse_token
 
 
 def create_token_accessor(
-    url_path: str, scope: str | None = None, token_cache_url: str | None = None
+    url_path: str, scope: Optional[str] = None, token_cache_url: Optional[str] = None
 ) -> TokenAccessorBase:
     token_cache_url = token_cache_url or get_env_value("TOKEN_CACHE_URL")
     token_scope = scope or get_env_value("TOKEN_SCOPE")
@@ -40,19 +41,19 @@ def create_token_accessor(
 
 
 def create_generic_client_token_accessor(
-    token_cache_url: str | None = None, scope: str = "api"
+    token_cache_url: Optional[str] = None, scope: str = "api"
 ) -> TokenAccessorBase:
     return create_token_accessor("generic-client", scope, token_cache_url)
 
 
 def create_nota_api_token_accessor(
-    token_cache_url: str | None = None, scope: str = "api"
+    token_cache_url: Optional[str] = None, scope: str = "api"
 ) -> TokenAccessorBase:
     return create_token_accessor("nota-api", scope, token_cache_url)
 
 
 def create_dicom_server_token_accessor(
-    token_cache_url: str | None = None, scope: str = "pacs"
+    token_cache_url: Optional[str] = None, scope: str = "pacs"
 ) -> TokenAccessorBase:
     return create_token_accessor("dicom-server", scope, token_cache_url)
 
