@@ -38,8 +38,7 @@ pipenv install git+https://github.com/altis-labs/token_accessor.git#egg=token_ac
 > the client may result in a 404 error
 
 ```python
-from token_accessor.token_cache_token_accessor import
-    create_generic_client_token_accessor
+from token_accessor.token_cache_token_accessor import create_generic_client_token_accessor
 
 # Create a token accessor
 token_accessor = create_generic_client_token_accessor()
@@ -57,8 +56,7 @@ headers = token.get_auth_header()
 ### To use a token for a GraphQL request
 
 ```python
-from token_accessor.token_cache_token_accessor import
-    create_generic_client_token_accessor
+from token_accessor.token_cache_token_accessor import create_generic_client_token_accessor
 from token_accessor.gql_client import GqlClient
 from gql import gql
 
