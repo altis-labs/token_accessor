@@ -25,5 +25,5 @@ test-unit = "python -m pytest token_accessor/tests/unit"
 build = "python -m build"
 
 [requires]
-python_version = "3.11"
-python_full_version = "3.11.6"
+python_version = "3.8"
+python_full_version = "3.8.12"
