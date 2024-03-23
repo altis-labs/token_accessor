@@ -7,6 +7,7 @@ from token_accessor.get_aws_auth import get_aws_auth
 from token_accessor.get_env_value import get_env_value
 from token_accessor.jwt_token import Token
 from token_accessor.lock import ThreadLock
+from token_accessor.memory_token_accessor import MemoryTokenAccessor
 from token_accessor.token_accessor_base import TokenAccessorBase
 from token_accessor.token_cache_token import parse_token
 
@@ -36,11 +37,15 @@ def create_token_accessor(
 
     aws_region = parts[2]
 
-    token_lock = ThreadLock()
+    cache_lock = ThreadLock()
 
-    return TokenCacheTokenAccessor(
-        token_lock, url, aws_region, token_scope, token_audience
+    cache_accessor = TokenCacheTokenAccessor(
+        cache_lock, url, aws_region, token_scope, token_audience
     )
+
+    memory_lock = ThreadLock()
+
+    return MemoryTokenAccessor(memory_lock, cache_accessor)
 
 
 def create_generic_client_token_accessor(
