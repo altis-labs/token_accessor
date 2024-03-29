@@ -22,7 +22,6 @@ def accessor() -> LegacyTokenCacheTokenAccessor:
     return LegacyTokenCacheTokenAccessor(
         mock_lock,
         "http://localhost:3000",
-        "region",
         "url",
         "client_id",
         "client_secret",
@@ -49,9 +48,7 @@ def mock_get_token_cache_token_failure_response(_url, _request):
 
 @freeze_time("2012-01-14 12:00:00")
 @patch("token_accessor.legacy_token_cache_token_accessor.get_aws_auth")
-def test_legacy_token_cache_token_accessor_returns_token(
-    mock_get_aws_auth, accessor
-):
+def test_legacy_token_cache_token_accessor_returns_token(mock_get_aws_auth, accessor):
     mock_get_aws_auth.return_value = MagicMock()
 
     with HTTMock(mock_get_token_cache_token_success_response):
@@ -96,4 +93,4 @@ def test_legacy_token_cache_token_accessor_raises_on_failed_token_parsing(
 )
 def test_get_auth_throws_when_no_credentials():
     with pytest.raises(AttributeError):
-        get_aws_auth("http://localhost:3000", "ca-central-1")
+        get_aws_auth("http://localhost:3000")

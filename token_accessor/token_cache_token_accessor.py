@@ -30,17 +30,10 @@ def create_token_accessor(
 
     url = urljoin(token_cache_url, url_path)
 
-    parsed_url = urlparse(url)
-    parts = parsed_url.netloc.split(".")
-    if len(parts) < 3:
-        raise ValueError(f"TOKEN_CACHE_URL ({token_cache_url}) is not valid")
-
-    aws_region = parts[2]
-
     cache_lock = ThreadLock()
 
     cache_accessor = TokenCacheTokenAccessor(
-        cache_lock, url, aws_region, token_scope, token_audience
+        cache_lock, url, token_scope, token_audience
     )
 
     memory_lock = ThreadLock()
@@ -71,14 +64,12 @@ class TokenCacheTokenAccessor(TokenAccessorBase):
         self,
         token_lock: ThreadLock,
         token_cache_url: str,
-        token_cache_region: str,
         client_scope: str,
         audience: str,
     ):
         super().__init__(token_lock)
 
         self.__token_cache_url = token_cache_url
-        self.__token_cache_region = token_cache_region
         self.__client_scope = client_scope
         self.__audience = audience
 
@@ -90,7 +81,7 @@ class TokenCacheTokenAccessor(TokenAccessorBase):
             "grant_type": "client_credentials",
         }
 
-        auth = get_aws_auth(self.__token_cache_url, self.__token_cache_region)
+        auth = get_aws_auth(self.__token_cache_url)
 
         response = requests.post(
             url=self.__token_cache_url, json=payload, headers=headers, auth=auth

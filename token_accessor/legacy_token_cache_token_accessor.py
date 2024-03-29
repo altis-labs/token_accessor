@@ -12,7 +12,6 @@ class LegacyTokenCacheTokenAccessor(TokenAccessorBase):
         self,
         token_lock: ThreadLock,
         token_cache_url: str,
-        token_cache_region: str,
         url: str,
         client_id: str,
         client_secret: str,
@@ -23,7 +22,6 @@ class LegacyTokenCacheTokenAccessor(TokenAccessorBase):
         super().__init__(token_lock)
 
         self.__token_cache_url = token_cache_url
-        self.__token_cache_region = token_cache_region
         self.__url = url
         self.__client_id = client_id
         self.__client_secret = client_secret
@@ -42,7 +40,7 @@ class LegacyTokenCacheTokenAccessor(TokenAccessorBase):
             "grant_type": self.__grant_type,
         }
 
-        auth = get_aws_auth(self.__token_cache_url, self.__token_cache_region)
+        auth = get_aws_auth(self.__token_cache_url)
 
         response = requests.post(
             url=self.__token_cache_url, json=payload, headers=headers, auth=auth
