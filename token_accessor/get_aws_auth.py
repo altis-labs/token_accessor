@@ -1,11 +1,14 @@
+from typing import Optional
 from urllib.parse import urlparse
 
 import boto3
 from aws_requests_auth.aws_auth import AWSRequestsAuth
 
 
-def get_aws_auth(url: str) -> AWSRequestsAuth:
-    session = boto3.Session()
+def get_aws_auth(url: str, session: Optional[boto3.Session] = None) -> AWSRequestsAuth:
+    if session is None:
+        session = boto3.Session()
+
     credentials = session.get_credentials()
     region = session.region_name
 

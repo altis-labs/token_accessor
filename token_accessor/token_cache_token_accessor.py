@@ -1,6 +1,7 @@
 from typing import Optional
 from urllib.parse import urljoin, urlparse
 
+import boto3
 import requests
 
 from token_accessor.get_aws_auth import get_aws_auth
@@ -13,7 +14,10 @@ from token_accessor.token_cache_token import parse_token
 
 
 def create_token_accessor(
-    url_path: str, scope: Optional[str] = None, token_cache_url: Optional[str] = None
+    url_path: str,
+    scope: Optional[str] = None,
+    token_cache_url: Optional[str] = None,
+    session: Optional[boto3.Session] = None,
 ) -> TokenAccessorBase:
     token_cache_url = token_cache_url or get_env_value("TOKEN_CACHE_URL")
     token_scope = scope or get_env_value("TOKEN_SCOPE")
@@ -33,7 +37,7 @@ def create_token_accessor(
     cache_lock = ThreadLock()
 
     cache_accessor = TokenCacheTokenAccessor(
-        cache_lock, url, token_scope, token_audience
+        cache_lock, url, token_scope, token_audience, session
     )
 
     memory_lock = ThreadLock()
@@ -42,21 +46,27 @@ def create_token_accessor(
 
 
 def create_generic_client_token_accessor(
-    token_cache_url: Optional[str] = None, scope: str = "api"
+    token_cache_url: Optional[str] = None,
+    scope: str = "api",
+    session: Optional[boto3.Session] = None,
 ) -> TokenAccessorBase:
-    return create_token_accessor("generic-client", scope, token_cache_url)
+    return create_token_accessor("generic-client", scope, token_cache_url, session)
 
 
 def create_nota_api_token_accessor(
-    token_cache_url: Optional[str] = None, scope: str = "api"
+    token_cache_url: Optional[str] = None,
+    scope: str = "api",
+    session: Optional[boto3.Session] = None,
 ) -> TokenAccessorBase:
-    return create_token_accessor("nota-api", scope, token_cache_url)
+    return create_token_accessor("nota-api", scope, token_cache_url, session)
 
 
 def create_dicom_server_token_accessor(
-    token_cache_url: Optional[str] = None, scope: str = "pacs"
+    token_cache_url: Optional[str] = None,
+    scope: str = "pacs",
+    session: Optional[boto3.Session] = None,
 ) -> TokenAccessorBase:
-    return create_token_accessor("dicom-server", scope, token_cache_url)
+    return create_token_accessor("dicom-server", scope, token_cache_url, session)
 
 
 class TokenCacheTokenAccessor(TokenAccessorBase):
@@ -66,12 +76,14 @@ class TokenCacheTokenAccessor(TokenAccessorBase):
         token_cache_url: str,
         client_scope: str,
         audience: str,
+        session: Optional[boto3.Session] = None,
     ):
         super().__init__(token_lock)
 
         self.__token_cache_url = token_cache_url
         self.__client_scope = client_scope
         self.__audience = audience
+        self.__session = session
 
     def access_token(self) -> Token:
         headers = {"content-type": "application/json"}
@@ -81,7 +93,7 @@ class TokenCacheTokenAccessor(TokenAccessorBase):
             "grant_type": "client_credentials",
         }
 
-        auth = get_aws_auth(self.__token_cache_url)
+        auth = get_aws_auth(self.__token_cache_url, self.__session)
 
         response = requests.post(
             url=self.__token_cache_url, json=payload, headers=headers, auth=auth
