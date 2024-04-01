@@ -27,7 +27,7 @@ graphql-core==3.2.3
 [:python_version >= "3.7"]
 jmespath==1.0.1
 multidict==6.0.5
-pydantic==1.10.14
+pydantic~=1.10.14
 yarl==1.9.4
 zope.event==5.0
 zope.interface==6.2
