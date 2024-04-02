@@ -4,22 +4,22 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
+aws-requests-auth = "~=0.4.3"
+boto3 = "~=1.34.74"
 gevent = "~=22.10.2"
 gql = {extras = ["requests"], version = "~=3.4.0" }
-requests = "==2.27.1"
-boto3 = "~=1.34.74"
-aws-requests-auth = "~=0.4.3"
+requests = "~=2.27.1"
 pydantic = "~=1.10.6"
 
 [dev-packages]
-pytest = "~=7.2.1"
-pytest-cov = "~=4.0"
+black = "~=24.3.0"
+bump2version = "~=1.0.1"
+build = "~=1.0.3"
 freezegun = "~=1.2.2"
 httmock = "~=1.4.0"
-moto = { extras = ["s3"], version = "*" }
-black = "*"
-build = "~=1.0.3"
-bump2version = "~=1.0.1"
+moto = { extras = ["s3"], version = "~=5.0.4" }
+pytest = "~=7.2.1"
+pytest-cov = "~=4.0"
 
 [scripts]
 test-unit = "python -m pytest token_accessor/tests/unit"
