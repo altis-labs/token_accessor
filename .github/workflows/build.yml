@@ -1,0 +1,44 @@
+name: Build and Bump Version
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build-and-bump:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python 3.8.12
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.8.12
+
+      - name: Install Pipenv
+        run: |
+          python -m pip install --upgrade pip
+          pip install pipenv
+
+      - name: Install dependencies
+        run: pipenv install --dev
+
+      - name: Bump patch version
+        run: pipenv run bump2version patch
+
+      - name: Delete old artifacts
+        run: |
+          rm -rf dist/* token_accessor.egg-info/*
+
+      - name: Build project
+        run: pipenv run build
+
+      - name: Commit changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add dist token_accessor.egg-info
+          git commit -m "Bump artifacts"
+          git push
