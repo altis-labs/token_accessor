@@ -5,7 +5,7 @@ from token_accessor.jwt_token import Token
 from token_accessor.lock import ThreadLock
 from token_accessor.token_accessor_base import TokenAccessorBase
 
-log = logging.getLogger()
+log = logging.getLogger("token_accessor")
 
 
 class MemoryTokenAccessor(TokenAccessorBase):
