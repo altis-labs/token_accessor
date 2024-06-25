@@ -1,3 +1,4 @@
+import os
 from typing import Optional
 from urllib.parse import urlparse
 
@@ -11,6 +12,9 @@ def get_aws_auth(url: str, session: Optional[boto3.Session] = None) -> AWSReques
 
     credentials = session.get_credentials()
     region = session.region_name
+
+    if region is None:
+        region = os.getenv("AWS_REGION", "ca-central-1")
 
     parsed_uri = urlparse(url)
 
