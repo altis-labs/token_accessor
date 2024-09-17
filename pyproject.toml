@@ -1,30 +1,3 @@
-#[build-system]
-#requires = ["setuptools>=61.0"]
-#build-backend = "setuptools.build_meta"
-
-[project]
-name = "token_accessor"
-version = "0.0.1"
-authors = [
-    { name = "Altis Labs, Inc.", email = "info@altislabs.com" }
-]
-description = "A library for accessing the Token Cache API"
-readme = "README.md"
-requires-python = ">=3.8"
-dependencies = [
-    "aws-requests-auth~=0.4",
-    "boto3~=1.34",
-    "gevent~=22.10",
-    "gql[requests]~=3.5",
-    "requests~=2.27",
-    "pydantic~=1.10",
-]
-
-[project.urls]
-Homepage = "https://github.com/altis-labs/token_accessor"
-Issues = "https://github.com/altis-labs/token_accessor/issues"
-
-
 [tool.poetry]
 name = "token-accessor"
 version = "0.1.0"
@@ -37,7 +10,7 @@ python = "^3.8"
 aws-requests-auth = "~0.4.3"
 boto3 = "~1.34.74"
 gevent = "~22.10.2"
-gql = {version = "~3.4.0", extras = ["requests"]}
+gql = {version = "~3.4", extras = ["requests"]}
 requests = "~2.27.1"
 pydantic = "~1.10.6"
 
