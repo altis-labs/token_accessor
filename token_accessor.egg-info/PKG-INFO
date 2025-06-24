@@ -1,11 +1,11 @@
-Metadata-Version: 2.1
+Metadata-Version: 2.4
 Name: token_accessor
 Version: 0.0.1
 Summary: A library for accessing the Token Cache API
 Author-email: "Altis Labs, Inc." <info@altislabs.com>
 Project-URL: Homepage, https://github.com/altis-labs/token_accessor
 Project-URL: Issues, https://github.com/altis-labs/token_accessor/issues
-Requires-Python: >=3.8
+Requires-Python: >=3.11
 Description-Content-Type: text/markdown
 License-File: LICENSE
 Requires-Dist: aws-requests-auth~=0.4.3
@@ -14,6 +14,8 @@ Requires-Dist: gevent~=23.9.0
 Requires-Dist: gql[requests]~=3.5.3
 Requires-Dist: requests~=2.32.4
 Requires-Dist: pydantic~=1.10.6
+Requires-Dist: urllib3~=2.2.3
+Dynamic: license-file
 
 # token_accessor
 
